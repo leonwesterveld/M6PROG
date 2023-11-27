@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    heyy
-</body>
-</html>
+<?php 
+    require_once '../source/config.php';
+    require_once '../source/database.php';
+    $connection = database_connect();
+    $plaats = 'amsterdam';
+    $sql = 'SELECT * FROM weersomstandighedenPerDag WHERE Plaats=? ORDER BY Datum'; 
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param('s', $plaats);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $weersomstandigheden = mysqli_fetch_assoc($result);
+    var_dump( $weersomstandigheden );
+?>
+

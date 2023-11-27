@@ -8,7 +8,7 @@ CREATE TABLE 'weersomstandighedenPerDag'
     'aantalGraden' DECIMAL NOT NULL,
     'windKracht' INT UNSIGNED NULL,
     'regenInMilimeters' INT NOT NULL,
-    'plaats' INT NOT NULL,
+    'plaats' varchar(225) NOT NULL,
     PRIMARY KEY ('idweersomstandighedenPerDag'),
     UNIQUE INDEX 'idweersomstandighedenPerDag_UNIQUE' ('idweersomstandighedenperoag' ASC) VISIBLE
 )
