@@ -6,5 +6,4 @@
             die( 'Failed to connect to MySQL: ' . $connection->connect_error );
          }
          return $connection;
-    }
-?>
+        }
