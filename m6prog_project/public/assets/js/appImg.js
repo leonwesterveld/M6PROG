@@ -24,13 +24,16 @@ function uploadFromFile(event) {
     }
 
     fetch("imagereceive.php", options)
-    .then((response) => response.json())
-    .then((data) => {
-        if (true === data.succeeded) { 
-            console.log("ja geupload");
-        }
-        if (false === data.succeeded) {
-            console.log("nee ging iets fout");
-        }
+    .then(async (response) => {
+        console.log(response);
+        let json = await response.json();
+        console.log(json);
+        showLink(json)
     });
+}
+
+function showLink(json) {
+    var link = document.getElementById("link");
+    link.textContent = "download het plaatje"
+    link.setAttribute("href", json.downloadlink)
 }
