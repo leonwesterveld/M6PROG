@@ -36,4 +36,5 @@ function showLink(json) {
     var link = document.getElementById("link");
     link.textContent = "download het plaatje"
     link.setAttribute("href", json.downloadlink)
+    
 }

@@ -13,10 +13,13 @@ services:
         image: nginx:latest
         ports:
             - 88:80
+            - 881:443
         links:
             - 'php'
         volumes:
             - './:/var/www/html'
+            - './docker/nginxcert/cert.crt:/ect/nginx/cert.crt'
+            - './docker/nginxcert/cert.key:/ect/nginx/cert.key'
             - './docker/nginx:/etc/nginx/conf.d'
         depends_on:
             - php
