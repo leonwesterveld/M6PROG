@@ -7,14 +7,14 @@ require_once '../source/config.php';
 
 // move_uploaded_file($_FILES["image"]["tmp_name"],"../uploads/temp.png");
 
-function handleFile($file, $link){
+function handleFile($file){
     $link = uniqid();
     $location = $file["tmp_name"];
     $ext = ".png";
     $filename = "../uploads/$link$ext";
     move_uploaded_file($location, $filename);
 
-    return $filename;
+    return $link;
 }
 
 function insertImageInDb($type, $size, $filename, $link){
@@ -41,10 +41,9 @@ $response = [
 
 $file = $_FILES["image"];
 if ($file["error"] == 0 ){
-    $link = uniqid();
-    $filename = handleFile($file, $link);
-    $response["succeeded"] = insertImageInDb("image/png", $file["size"], $filename, createLink($link));
-    $response["downloadlink"] = createLink($link);
+    $filename = handleFile($file);
+    $response["succeeded"] = insertImageInDb("image/png", $file["size"], $filename, createLink($filename));
+    $response["downloadlink"] = createLink($filename);
 }else{
     $response["message"] = "Error during upload: " . $file["error"];
 }
